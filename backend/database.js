@@ -120,17 +120,13 @@ const readStudentInfo = async (id) => {
   });
 };
 
-const addStudent = async (name, age, id, religion) => {
-  const sql = `INSERT INTO Student (name, age, id, religion) VALUES (?, ?, ?, ?)`;
+const addStudent = async (id, name, age, religion) => {
+  const sql = `INSERT INTO teacher(id,name,age,religion) values (?, ?, ?, ?)`;
   return new Promise((resolve, reject) => {
     knex_db
-      .raw(sql, [name, age, id, religion])
+      .raw(sql, [id, name, age, religion])
       .then(() => {
-        // After insertion, retrieve the newly added student from the database
-        return knex_db.raw(`SELECT * FROM Student WHERE id = ?`, [id]);
-      })
-      .then((result) => {
-        resolve({ status: "Successfully inserted Student", student });
+        resolve({ status: "Successfully inserted Student" });
       })
       .catch((error) => {
         reject(error);
