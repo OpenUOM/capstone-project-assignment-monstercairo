@@ -125,8 +125,12 @@ const addStudent = async (name, age, id, religion) => {
   return new Promise((resolve, reject) => {
     knex_db
       .raw(sql, [name, age, id, religion])
-      .then((student) => {
-        resolve({ status: "Successfully inserted Student" });
+      .then(() => {
+        // After insertion, retrieve the newly added student from the database
+        return knex_db.raw(`SELECT * FROM Student WHERE id = ?`, [id]);
+      })
+      .then((result) => {
+        resolve({ status: "Successfully inserted Student", student });
       })
       .catch((error) => {
         reject(error);
