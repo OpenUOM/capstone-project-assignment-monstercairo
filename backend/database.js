@@ -121,7 +121,7 @@ const readStudentInfo = async (id) => {
 };
 
 const addStudent = async (name, age, religion, id) => {
-  const sql = `INSERT INTO Student (name, age, id) VALUES (?, ?, ?, ?)`;
+  const sql = `INSERT INTO Student (name, age, religion, id) VALUES (?, ?, ?, ?)`;
   return new Promise((resolve, reject) => {
     knex_db
       .raw(sql, [name, age, religion, id])
