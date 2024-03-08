@@ -128,7 +128,7 @@ const addStudent = async (name, age, religion, id) => {
       .then(() => {
         resolve({ status: "Successfully inserted Student" });
       })
-      .catch((error) => {
+      .catch(() => {
         reject(error);
       });
   });
